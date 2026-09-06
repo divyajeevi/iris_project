@@ -1,187 +1,577 @@
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Iris Flower Prediction</title>
 
     <style>
         * {
-            box-sizing: border-box;
-        }
-
-        body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f7ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        .container {
-            width: 90%;
-            max-width: 500px;
+       body {
+    font-family: Arial, sans-serif;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.78),
+                        rgba(255, 255, 255, 0.78)),
+        url("/static/iris-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    color: #222;
+}
+
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            padding: 18px 8%;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        h1 {
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5b3cc4;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #5b3cc4;
+        }
+
+        /* HERO */
+        .hero {
             text-align: center;
-            color: #2457a6;
+            padding: 70px 20px 40px;
+        }
+
+        .flower-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            color: #34206b;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* MAIN CARD */
+      .prediction-section {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto 60px;
+
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(5px);
+
+    padding: 40px;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            color: #34206b;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        /* FORM */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .input-box {
+            background: #f8f7ff;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #e3defa;
+        }
+
+        .input-box label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #40346b;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .input-box input:focus {
+            outline: none;
+            border-color: #6c4bd8;
+            box-shadow: 0 0 0 3px rgba(108,75,216,0.12);
+        }
+
+        .unit {
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+        }
+
+        /* BUTTON */
+        .predict-btn {
+            width: 100%;
+            margin-top: 30px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6c4bd8, #8b5cf6);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108,75,216,0.3);
+        }
+
+        /* RESULT */
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            background: #e9f9ef;
+            border: 1px solid #b8e8c7;
+        }
+
+        .result h3 {
+            color: #218838;
+            margin-bottom: 8px;
+            font-size: 17px;
+        }
+
+        .result p {
+            color: #176b2c;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* ERROR */
+        .error {
+            margin-top: 25px;
+            padding: 18px;
+            text-align: center;
+            border-radius: 12px;
+            background: #fff0f0;
+            color: #b00020;
+            border: 1px solid #ffcaca;
+        }
+
+        /* EXAMPLE */
+        .example {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            text-align: center;
+            color: #555;
+        }
+
+        .example strong {
+            color: #34206b;
+        }
+
+        /* FLOWER TYPES */
+        .types {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto 70px;
+        }
+
+        .types h2 {
+            text-align: center;
+            color: #34206b;
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            color: #5b3cc4;
             margin-bottom: 10px;
         }
 
-        .subtitle {
-            text-align: center;
+        .card p {
             color: #666;
-            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
-        label {
-            display: block;
-            margin-top: 14px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #2457a6;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #2457a6;
+        /* FOOTER */
+        footer {
+            background: #34206b;
             color: white;
-            font-size: 17px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #17427f;
-        }
-
-        .result {
-            margin-top: 22px;
-            padding: 15px;
             text-align: center;
-            border-radius: 8px;
-            background: #e7f7e7;
-            color: #176b2c;
-            font-size: 20px;
-            font-weight: bold;
+            padding: 25px;
         }
 
-        .error {
-            margin-top: 22px;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            background: #ffe8e8;
-            color: #b00020;
+        footer p {
+            margin: 5px;
         }
 
-        .example {
-            margin-top: 20px;
-            padding: 12px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            color: #555;
-            font-size: 14px;
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .prediction-section {
+                padding: 25px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">🌸 IrisPredict</div>
 
-    <h1>🌸 Iris Flower Prediction</h1>
-    <p class="subtitle">Enter the flower measurements</p>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#predict">Predict</a>
+            <a href="#types">Iris Types</a>
+        </div>
+    </nav>
 
-    <form action="/predict" method="POST">
 
-        <label for="sepal_length">Sepal Length (cm)</label>
-        <input
-            type="number"
-            step="any"
-            id="sepal_length"
-            name="sepal_length"
-            placeholder="Example: 5.1"
-            value="{{ values.sepal_length if values else '' }}"
-            required
-        >
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
 
-        <label for="sepal_width">Sepal Width (cm)</label>
-        <input
-            type="number"
-            step="any"
-            id="sepal_width"
-            name="sepal_width"
-            placeholder="Example: 3.5"
-            value="{{ values.sepal_width if values else '' }}"
-            required
-        >
+        <div class="flower-icon">🌸</div>
 
-        <label for="petal_length">Petal Length (cm)</label>
-        <input
-            type="number"
-            step="any"
-            id="petal_length"
-            name="petal_length"
-            placeholder="Example: 1.4"
-            value="{{ values.petal_length if values else '' }}"
-            required
-        >
+        <h1>Iris Flower Prediction</h1>
 
-        <label for="petal_width">Petal Width (cm)</label>
-        <input
-            type="number"
-            step="any"
-            id="petal_width"
-            name="petal_width"
-            placeholder="Example: 0.2"
-            value="{{ values.petal_width if values else '' }}"
-            required
-        >
+        <p>
+            Predict the species of an Iris flower using its
+            sepal and petal measurements with a Machine Learning model.
+        </p>
 
-        <button type="submit">Predict Iris Flower</button>
-    </form>
+    </section>
 
-    {% if prediction %}
+
+    <!-- PREDICTION SECTION -->
+    <section class="prediction-section" id="predict">
+
+        <div class="section-title">
+
+            <h2>Enter Flower Measurements</h2>
+
+            <p>
+                Enter the measurements in centimeters and click predict.
+            </p>
+
+        </div>
+
+
+        <form action="/predict" method="POST">
+
+            <div class="form-grid">
+
+                <!-- Sepal Length -->
+                <div class="input-box">
+
+                    <label for="sepal_length">
+                        🌿 Sepal Length
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="sepal_length"
+                        name="sepal_length"
+                        placeholder="Example: 5.1"
+                        value="{{ values.sepal_length if values else '' }}"
+                        required
+                    >
+
+                    <div class="unit">
+                        Measurement in centimeters (cm)
+                    </div>
+
+                </div>
+
+
+                <!-- Sepal Width -->
+                <div class="input-box">
+
+                    <label for="sepal_width">
+                        🌿 Sepal Width
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="sepal_width"
+                        name="sepal_width"
+                        placeholder="Example: 3.5"
+                        value="{{ values.sepal_width if values else '' }}"
+                        required
+                    >
+
+                    <div class="unit">
+                        Measurement in centimeters (cm)
+                    </div>
+
+                </div>
+
+
+                <!-- Petal Length -->
+                <div class="input-box">
+
+                    <label for="petal_length">
+                        🌺 Petal Length
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="petal_length"
+                        name="petal_length"
+                        placeholder="Example: 1.4"
+                        value="{{ values.petal_length if values else '' }}"
+                        required
+                    >
+
+                    <div class="unit">
+                        Measurement in centimeters (cm)
+                    </div>
+
+                </div>
+
+
+                <!-- Petal Width -->
+                <div class="input-box">
+
+                    <label for="petal_width">
+                        🌺 Petal Width
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        id="petal_width"
+                        name="petal_width"
+                        placeholder="Example: 0.2"
+                        value="{{ values.petal_width if values else '' }}"
+                        required
+                    >
+
+                    <div class="unit">
+                        Measurement in centimeters (cm)
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+            <button type="submit" class="predict-btn">
+                🔍 Predict Iris Flower
+            </button>
+
+        </form>
+
+
+        <!-- PREDICTION RESULT -->
+
+        {% if prediction %}
+
         <div class="result">
-            Prediction: {{ prediction }}
-        </div>
-    {% endif %}
 
-    {% if error %}
+            <h3>Prediction Result</h3>
+
+            <p>🌸 {{ prediction }}</p>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
         <div class="error">
-            {{ error }}
+            ⚠️ {{ error }}
         </div>
-    {% endif %}
 
-    <div class="example">
-        <strong>Example:</strong> 5.1, 3.5, 1.4, 0.2 → Iris Setosa
-    </div>
+        {% endif %}
 
-</div>
+
+        <!-- EXAMPLE -->
+
+        <div class="example">
+
+            <strong>Example Input:</strong>
+
+            5.1, 3.5, 1.4, 0.2
+
+            → <strong>Iris Setosa</strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- IRIS TYPES -->
+    <section class="types" id="types">
+
+        <h2>🌸 Iris Flower Types</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">🌸</div>
+
+                <h3>Iris Setosa</h3>
+
+                <p>
+                    One of the three Iris species that can be
+                    predicted by the machine learning model.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🌷</div>
+
+                <h3>Iris Versicolor</h3>
+
+                <p>
+                    Another Iris species identified using the
+                    flower's sepal and petal measurements.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🌺</div>
+
+                <h3>Iris Virginica</h3>
+
+                <p>
+                    The third Iris species that the model can
+                    classify from the given measurements.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p><strong>🌸 IrisPredict</strong></p>
+
+        <p>Machine Learning Project using Iris Dataset</p>
+
+    </footer>
 
 </body>
 </html>
+```
