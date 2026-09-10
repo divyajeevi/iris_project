@@ -1,0 +1,10 @@
+{
+  "name": "iris-flask-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('No frontend build required for this Flask application.')\"",
+    "start": "python app.py",
+    "deploy": "python -m pip install -r requirements.txt && python app.py"
+  }
+}
