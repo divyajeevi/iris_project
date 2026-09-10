@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iris Prediction - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 20%, #ddd6fe 0, transparent 25%),
+                radial-gradient(circle at 90% 80%, #fbcfe8 0, transparent 25%),
+                linear-gradient(135deg, #f5f3ff, #fdf2f8, #eff6ff);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Background flowers */
+
+        .flower {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.35;
+            filter: blur(0.5px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .flower1 {
+            left: 3%;
+            top: 8%;
+        }
+
+        .flower2 {
+            right: 4%;
+            top: 12%;
+            font-size: 90px;
+            animation-delay: 1s;
+        }
+
+        .flower3 {
+            left: 5%;
+            bottom: 8%;
+            font-size: 110px;
+            animation-delay: 2s;
+        }
+
+        .flower4 {
+            right: 5%;
+            bottom: 5%;
+            font-size: 120px;
+            animation-delay: 3s;
+        }
+
+        .flower5 {
+            left: 20%;
+            top: 3%;
+            font-size: 55px;
+            animation-delay: 1.5s;
+        }
+
+        .flower6 {
+            right: 20%;
+            bottom: 4%;
+            font-size: 60px;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        /* Login card */
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+
+            background: rgba(255, 255, 255, 0.88);
+
+            backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.9);
+
+            border-radius: 28px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 25px 70px rgba(100, 80, 160, 0.20);
+
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Iris icon */
+
+        .iris-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ddd6fe,
+                #f5d0fe
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 42px;
+
+            box-shadow:
+                0 10px 25px rgba(139, 92, 246, 0.20);
+        }
+
+        /* Heading */
+
+        h1 {
+            text-align: center;
+
+            color: #4338ca;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 16px;
+
+            margin-bottom: 28px;
+        }
+
+        /* Error */
+
+        .error {
+            background: #fff1f2;
+
+            color: #be123c;
+
+            border: 1px solid #fecdd3;
+
+            padding: 13px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        /* Labels */
+
+        label {
+            display: block;
+
+            color: #3730a3;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+        }
+
+        /* Inputs */
+
+        input {
+            width: 100%;
+
+            padding: 16px;
+
+            margin-bottom: 20px;
+
+            border: 2px solid #ddd6fe;
+
+            border-radius: 14px;
+
+            background: rgba(255, 255, 255, 0.9);
+
+            color: #334155;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus {
+            border-color: #8b5cf6;
+
+            box-shadow:
+                0 0 0 4px rgba(139, 92, 246, 0.12);
+        }
+
+        /* Login button */
+
+        button {
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #a855f7
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 30px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Demo login */
+
+        .demo {
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: rgba(237, 233, 254, 0.7);
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            border: 1px solid #ddd6fe;
+        }
+
+        .demo strong {
+            display: block;
+
+            color: #5b21b6;
+
+            font-size: 15px;
+
+            margin-bottom: 7px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            .flower {
+                font-size: 65px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background flowers -->
+
+    <div class="flower flower1">🌸</div>
+    <div class="flower flower2">🌺</div>
+    <div class="flower flower3">🌷</div>
+    <div class="flower flower4">🌸</div>
+    <div class="flower flower5">🌼</div>
+    <div class="flower flower6">🌷</div>
+
+
+    <!-- Login Card -->
+
+    <div class="login-container">
+
+        <div class="iris-icon">
+            🌸
+        </div>
+
+        <h1>Iris Prediction</h1>
+
+        <p class="subtitle">
+            Login to continue
+        </p>
+
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+
+        <form action="/login" method="POST">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button type="submit">
+                Login →
+            </button>
+
+        </form>
+
+
+        <div class="demo">
+
+            <strong>🌿 Demo Login</strong>
+
+            Username: admin<br>
+
+            Password: iris123
+
+        </div>
+
+    </div>
+
+</body>
+</html>

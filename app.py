@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,session
 import joblib
 import os
 
 app = Flask(__name__)
+app.secret_key="iris-secret-key"
 
 # Load the trained Iris model
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "iris_model.pkl")
@@ -18,7 +19,26 @@ iris_names = {
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("login.html")
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form["username"]
+    password = request.form["password"]
+
+    if username == "admin" and password == "iris123":
+        session["logged_in"] = True
+        return redirect("/home")
+
+    return render_template("login.html", error="Invalid username or password")
+
+
+@app.route("/home")
+def dashboard():
+    if not session.get("logged_in"):
+        return redirect("/") 
+    return render_template("index.html")       
 
 
 @app.route("/predict", methods=["POST"])
