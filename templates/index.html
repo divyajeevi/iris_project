@@ -1,7 +1,7 @@
 
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
     <title>Iris Flower Prediction</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -16,366 +17,898 @@
             scroll-behavior: smooth;
         }
 
-    body {
-    font-family: Arial, sans-serif;
 
-    background:
-        radial-gradient(circle at 10% 20%, #ddd6fe 0, transparent 25%),
-        radial-gradient(circle at 90% 80%, #fbcfe8 0, transparent 25%),
-        linear-gradient(135deg, #f5f3ff, #fdf2f8, #eff6ff);
+        /* ==============================
+           BODY
+        ============================== */
 
-    color: #222;
-    min-height:100vh;
-    }
+        body {
+            font-family: Arial, sans-serif;
 
-    
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    #ddd6fe 0,
+                    transparent 25%
+                ),
 
-        /* NAVBAR */
+                radial-gradient(
+                    circle at 90% 80%,
+                    #fbcfe8 0,
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f5f3ff,
+                    #fdf2f8,
+                    #eff6ff
+                );
+
+            color: #222;
+
+            min-height: 100vh;
+
+            position: relative;
+
+            overflow-x: hidden;
+        }
+
+
+        /* ==============================
+           BACKGROUND FLOWERS
+        ============================== */
+
+        .flower {
+            position: fixed;
+
+            font-size: 100px;
+
+            opacity: 0.35;
+
+            filter: blur(0.5px);
+
+            animation: float 6s ease-in-out infinite;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        .flower1 {
+            left: 3%;
+            top: 8%;
+            font-size: 100px;
+        }
+
+
+        .flower2 {
+            right: 4%;
+            top: 12%;
+            font-size: 90px;
+            animation-delay: 1s;
+        }
+
+
+        .flower3 {
+            left: 5%;
+            bottom: 8%;
+            font-size: 110px;
+            animation-delay: 2s;
+        }
+
+
+        .flower4 {
+            right: 5%;
+            bottom: 5%;
+            font-size: 120px;
+            animation-delay: 3s;
+        }
+
+
+        .flower5 {
+            left: 20%;
+            top: 3%;
+            font-size: 55px;
+            animation-delay: 1.5s;
+        }
+
+
+        .flower6 {
+            right: 20%;
+            bottom: 4%;
+            font-size: 60px;
+            animation-delay: 2.5s;
+        }
+
+
+        @keyframes float {
+
+            0%, 100% {
+                transform:
+                    translateY(0px)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-15px)
+                    rotate(5deg);
+            }
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
         nav {
             width: 100%;
+
             padding: 18px 8%;
-            background: white;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            backdrop-filter: blur(10px);
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+            box-shadow:
+                0 2px 12px rgba(0,0,0,0.08);
+
             position: sticky;
+
             top: 0;
+
             z-index: 10;
         }
 
+
         .logo {
             font-size: 24px;
+
             font-weight: bold;
+
             color: #5b3cc4;
         }
 
+
         nav a {
             text-decoration: none;
+
             color: #444;
+
             margin-left: 25px;
+
             font-weight: 500;
         }
+
 
         nav a:hover {
             color: #5b3cc4;
         }
 
-        /* HERO */
-        .hero {
-            text-align: center;
-            padding: 70px 20px 40px;
+
+        /* ==============================
+           LOGOUT
+        ============================== */
+
+        .logout-bar {
+            text-align: right;
+
+            padding: 12px 8%;
+
+            background:
+                rgba(255,255,255,0.75);
+
+            position: relative;
+
+            z-index: 5;
         }
+
+
+        .logout-bar a {
+            color: #5b3cc4;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        .logout-bar a:hover {
+            color: #34206b;
+        }
+
+
+        /* ==============================
+           HERO
+        ============================== */
+
+        .hero {
+
+            text-align: center;
+
+            padding: 70px 20px 40px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
 
         .flower-icon {
+
             font-size: 55px;
+
             margin-bottom: 15px;
+
+            animation: flowerPulse 3s ease-in-out infinite;
         }
+
+
+        @keyframes flowerPulse {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
 
         .hero h1 {
+
             font-size: 45px;
+
             color: #34206b;
+
             margin-bottom: 15px;
         }
 
+
         .hero p {
+
             max-width: 650px;
+
             margin: auto;
+
             color: #666;
+
             font-size: 18px;
+
             line-height: 1.6;
         }
 
-        /* MAIN CARD */
-      .prediction-section {
-    width: 90%;
-    max-width: 1000px;
-    margin: 30px auto 60px;
 
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(5px);
+        /* ==============================
+           MAIN CARD
+        ============================== */
 
-    padding: 40px;
-    border-radius: 22px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
-}
+        .prediction-section {
+
+            width: 90%;
+
+            max-width: 1000px;
+
+            margin: 30px auto 60px;
+
+            background:
+                rgba(255, 255, 255, 0.94);
+
+            backdrop-filter: blur(8px);
+
+            padding: 40px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.15);
+
+            position: relative;
+
+            z-index: 2;
+        }
+
 
         .section-title {
+
             text-align: center;
+
             margin-bottom: 30px;
         }
 
+
         .section-title h2 {
+
             color: #34206b;
+
             font-size: 28px;
+
             margin-bottom: 8px;
         }
 
+
         .section-title p {
+
             color: #777;
         }
 
-        /* FORM */
+
+        /* ==============================
+           FORM
+        ============================== */
+
         .form-grid {
+
             display: grid;
-            grid-template-columns: 1fr 1fr;
+
+            grid-template-columns:
+                1fr 1fr;
+
             gap: 22px;
         }
 
+
         .input-box {
+
             background: #f8f7ff;
+
             padding: 20px;
+
             border-radius: 14px;
-            border: 1px solid #e3defa;
+
+            border:
+                1px solid #e3defa;
+
+            transition: 0.3s;
         }
 
+
+        .input-box:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(91,60,196,0.08);
+        }
+
+
         .input-box label {
+
             display: block;
+
             font-weight: bold;
+
             margin-bottom: 10px;
+
             color: #40346b;
         }
 
+
         .input-box input {
+
             width: 100%;
+
             padding: 13px;
-            border: 1px solid #ccc;
+
+            border:
+                1px solid #ccc;
+
             border-radius: 9px;
+
             font-size: 16px;
+
             background: white;
         }
 
+
         .input-box input:focus {
+
             outline: none;
+
             border-color: #6c4bd8;
-            box-shadow: 0 0 0 3px rgba(108,75,216,0.12);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(108,75,216,0.12);
         }
 
+
         .unit {
+
             font-size: 13px;
+
             color: #888;
+
             margin-top: 6px;
         }
 
-        /* BUTTON */
+
+        /* ==============================
+           BUTTON
+        ============================== */
+
         .predict-btn {
+
             width: 100%;
+
             margin-top: 30px;
+
             padding: 16px;
+
             border: none;
+
             border-radius: 12px;
-            background: linear-gradient(90deg, #6c4bd8, #8b5cf6);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6c4bd8,
+                    #8b5cf6
+                );
+
             color: white;
+
             font-size: 18px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             transition: 0.3s;
         }
 
+
         .predict-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(108,75,216,0.3);
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(108,75,216,0.3);
         }
 
-        /* RESULT */
+
+        /* ==============================
+           RESULT
+        ============================== */
+
         .result {
+
             margin-top: 30px;
+
             padding: 25px;
+
             text-align: center;
+
             border-radius: 15px;
+
             background: #e9f9ef;
-            border: 1px solid #b8e8c7;
+
+            border:
+                1px solid #b8e8c7;
         }
+
 
         .result h3 {
+
             color: #218838;
+
             margin-bottom: 8px;
+
             font-size: 17px;
         }
 
+
         .result p {
+
             color: #176b2c;
+
             font-size: 25px;
+
             font-weight: bold;
         }
 
-        /* ERROR */
+
+        /* ==============================
+           ERROR
+        ============================== */
+
         .error {
+
             margin-top: 25px;
+
             padding: 18px;
+
             text-align: center;
+
             border-radius: 12px;
+
             background: #fff0f0;
+
             color: #b00020;
-            border: 1px solid #ffcaca;
+
+            border:
+                1px solid #ffcaca;
         }
 
-        /* EXAMPLE */
+
+        /* ==============================
+           EXAMPLE
+        ============================== */
+
         .example {
+
             margin-top: 25px;
+
             padding: 18px;
+
             background: #f5f5f5;
+
             border-radius: 12px;
+
             text-align: center;
+
             color: #555;
         }
 
+
         .example strong {
+
             color: #34206b;
         }
 
-        /* FLOWER TYPES */
+
+        /* ==============================
+           FLOWER TYPES
+        ============================== */
+
         .types {
+
             width: 90%;
+
             max-width: 1000px;
+
             margin: 0 auto 70px;
+
+            position: relative;
+
+            z-index: 2;
         }
+
 
         .types h2 {
+
             text-align: center;
+
             color: #34206b;
+
             margin-bottom: 25px;
+
             font-size: 30px;
         }
 
+
         .cards {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
+
         .card {
-            background: white;
+
+            background:
+                rgba(255,255,255,0.94);
+
             padding: 28px;
+
             text-align: center;
+
             border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+            box-shadow:
+                0 6px 20px rgba(0,0,0,0.08);
+
             transition: 0.3s;
         }
 
+
         .card:hover {
-            transform: translateY(-5px);
+
+            transform:
+                translateY(-5px);
         }
 
+
         .card .icon {
+
             font-size: 40px;
+
             margin-bottom: 12px;
         }
 
+
         .card h3 {
+
             color: #5b3cc4;
+
             margin-bottom: 10px;
         }
 
+
         .card p {
+
             color: #666;
+
             line-height: 1.5;
         }
 
-        /* FOOTER */
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
         footer {
+
             background: #34206b;
+
             color: white;
+
             text-align: center;
+
             padding: 25px;
+
+            position: relative;
+
+            z-index: 2;
         }
 
+
         footer p {
+
             margin: 5px;
         }
 
-        /* RESPONSIVE */
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
         @media (max-width: 700px) {
 
             nav {
+
                 padding: 15px 5%;
             }
 
+
             nav a {
+
                 margin-left: 10px;
+
                 font-size: 14px;
             }
 
+
             .hero h1 {
+
                 font-size: 32px;
             }
 
+
             .prediction-section {
+
                 padding: 25px;
             }
 
+
             .form-grid {
+
                 grid-template-columns: 1fr;
             }
+
 
             .cards {
+
                 grid-template-columns: 1fr;
             }
+
+
+            .flower {
+
+                font-size: 65px;
+            }
+
+
+            .flower1 {
+
+                left: 0;
+            }
+
+
+            .flower2 {
+
+                right: 0;
+            }
+
+
+            .flower3 {
+
+                left: 0;
+            }
+
+
+            .flower4 {
+
+                right: 0;
+            }
         }
+
     </style>
+
 </head>
 
+
 <body>
-    
-        <!-- LOGOUT -->
-    <div style="text-align: right; padding: 15px 8%; background: white;">
-        <a href="/logout"
-           style="color: #5b3cc4; text-decoration: none; font-weight: bold;">
-            Logout
-        </a>
+
+
+    <!-- ==================================
+         BACKGROUND FLOWERS
+    ================================== -->
+
+    <div class="flower flower1">
+        🌸
     </div>
 
-    <!-- NAVBAR -->
+    <div class="flower flower2">
+        🌺
+    </div>
+
+    <div class="flower flower3">
+        🌷
+    </div>
+
+    <div class="flower flower4">
+        🌸
+    </div>
+
+    <div class="flower flower5">
+        🌼
+    </div>
+
+    <div class="flower flower6">
+        🌷
+    </div>
+
+
+    <!-- ==================================
+         LOGOUT
+    ================================== -->
+
+    <div class="logout-bar">
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- ==================================
+         NAVBAR
+    ================================== -->
+
     <nav>
-        <div class="logo">🌸 IrisPredict</div>
+
+        <div class="logo">
+            🌸 IrisPredict
+        </div>
+
 
         <div>
-            <a href="#home">Home</a>
-            <a href="#predict">Predict</a>
-            <a href="#types">Iris Types</a>
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#predict">
+                Predict
+            </a>
+
+            <a href="#types">
+                Iris Types
+            </a>
+
         </div>
+
     </nav>
 
 
-    <!-- HERO SECTION -->
+    <!-- ==================================
+         HERO SECTION
+    ================================== -->
+
     <section class="hero" id="home">
 
-        <div class="flower-icon">🌸</div>
+        <div class="flower-icon">
+            🌸
+        </div>
 
-        <h1>Iris Flower Prediction</h1>
+
+        <h1>
+            Iris Flower Prediction
+        </h1>
+
 
         <p>
-            Predict the species of an Iris flower using its
-            sepal and petal measurements with a Machine Learning model.
+
+            Predict the species of an Iris flower
+            using its sepal and petal measurements
+            with a Machine Learning model.
+
         </p>
 
     </section>
 
 
-    <!-- PREDICTION SECTION -->
-    <section class="prediction-section" id="predict">
+    <!-- ==================================
+         PREDICTION SECTION
+    ================================== -->
+
+    <section
+        class="prediction-section"
+        id="predict"
+    >
+
 
         <div class="section-title">
 
-            <h2>Enter Flower Measurements</h2>
+            <h2>
+                Enter Flower Measurements
+            </h2>
+
 
             <p>
-                Enter the measurements in centimeters and click predict.
+                Enter the measurements in centimeters
+                and click predict.
             </p>
 
         </div>
 
 
-        <form action="/predict" method="POST">
+        <form
+            action="/predict"
+            method="POST"
+        >
+
 
             <div class="form-grid">
 
-                <!-- Sepal Length -->
+
+                <!-- SEPAL LENGTH -->
+
                 <div class="input-box">
 
                     <label for="sepal_length">
                         🌿 Sepal Length
                     </label>
+
 
                     <input
                         type="number"
@@ -387,6 +920,7 @@
                         required
                     >
 
+
                     <div class="unit">
                         Measurement in centimeters (cm)
                     </div>
@@ -394,12 +928,14 @@
                 </div>
 
 
-                <!-- Sepal Width -->
+                <!-- SEPAL WIDTH -->
+
                 <div class="input-box">
 
                     <label for="sepal_width">
                         🌿 Sepal Width
                     </label>
+
 
                     <input
                         type="number"
@@ -411,6 +947,7 @@
                         required
                     >
 
+
                     <div class="unit">
                         Measurement in centimeters (cm)
                     </div>
@@ -418,12 +955,14 @@
                 </div>
 
 
-                <!-- Petal Length -->
+                <!-- PETAL LENGTH -->
+
                 <div class="input-box">
 
                     <label for="petal_length">
                         🌺 Petal Length
                     </label>
+
 
                     <input
                         type="number"
@@ -435,6 +974,7 @@
                         required
                     >
 
+
                     <div class="unit">
                         Measurement in centimeters (cm)
                     </div>
@@ -442,12 +982,14 @@
                 </div>
 
 
-                <!-- Petal Width -->
+                <!-- PETAL WIDTH -->
+
                 <div class="input-box">
 
                     <label for="petal_width">
                         🌺 Petal Width
                     </label>
+
 
                     <input
                         type="number"
@@ -459,126 +1001,207 @@
                         required
                     >
 
+
                     <div class="unit">
                         Measurement in centimeters (cm)
                     </div>
 
                 </div>
 
+
             </div>
 
 
-            <!-- BUTTON -->
-            <button type="submit" class="predict-btn">
+            <!-- PREDICT BUTTON -->
+
+            <button
+                type="submit"
+                class="predict-btn"
+            >
+
                 🔍 Predict Iris Flower
+
             </button>
+
 
         </form>
 
 
-        <!-- PREDICTION RESULT -->
+        <!-- ==================================
+             RESULT
+        ================================== -->
 
         {% if prediction %}
 
         <div class="result">
 
-            <h3>Prediction Result</h3>
+            <h3>
+                Prediction Result
+            </h3>
 
-            <p>🌸 {{ prediction }}</p>
+
+            <p>
+                🌸 {{ prediction }}
+            </p>
 
         </div>
 
         {% endif %}
 
 
-        <!-- ERROR -->
+        <!-- ==================================
+             ERROR
+        ================================== -->
 
         {% if error %}
 
         <div class="error">
+
             ⚠️ {{ error }}
+
         </div>
 
         {% endif %}
 
 
-        <!-- EXAMPLE -->
+        <!-- ==================================
+             EXAMPLE
+        ================================== -->
 
         <div class="example">
 
-            <strong>Example Input:</strong>
+            <strong>
+                Example Input:
+            </strong>
 
             5.1, 3.5, 1.4, 0.2
 
-            → <strong>Iris Setosa</strong>
+            → 
+
+            <strong>
+                Iris Setosa
+            </strong>
 
         </div>
+
 
     </section>
 
 
-    <!-- IRIS TYPES -->
-    <section class="types" id="types">
+    <!-- ==================================
+         IRIS TYPES
+    ================================== -->
 
-        <h2>🌸 Iris Flower Types</h2>
+    <section
+        class="types"
+        id="types"
+    >
+
+
+        <h2>
+            🌸 Iris Flower Types
+        </h2>
+
 
         <div class="cards">
 
+
+            <!-- SETOSA -->
+
             <div class="card">
 
-                <div class="icon">🌸</div>
+                <div class="icon">
+                    🌸
+                </div>
 
-                <h3>Iris Setosa</h3>
+
+                <h3>
+                    Iris Setosa
+                </h3>
+
 
                 <p>
-                    One of the three Iris species that can be
-                    predicted by the machine learning model.
+
+                    One of the three Iris species
+                    that can be predicted by the
+                    machine learning model.
+
                 </p>
 
             </div>
 
 
+            <!-- VERSICOLOR -->
+
             <div class="card">
 
-                <div class="icon">🌷</div>
+                <div class="icon">
+                    🌷
+                </div>
 
-                <h3>Iris Versicolor</h3>
+
+                <h3>
+                    Iris Versicolor
+                </h3>
+
 
                 <p>
-                    Another Iris species identified using the
-                    flower's sepal and petal measurements.
+
+                    Another Iris species identified
+                    using the flower's sepal and
+                    petal measurements.
+
                 </p>
 
             </div>
 
 
+            <!-- VIRGINICA -->
+
             <div class="card">
 
-                <div class="icon">🌺</div>
+                <div class="icon">
+                    🌺
+                </div>
 
-                <h3>Iris Virginica</h3>
+
+                <h3>
+                    Iris Virginica
+                </h3>
+
 
                 <p>
-                    The third Iris species that the model can
-                    classify from the given measurements.
+
+                    The third Iris species that
+                    the model can classify from
+                    the given measurements.
+
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- ==================================
+         FOOTER
+    ================================== -->
+
     <footer>
 
-        <p><strong>🌸 IrisPredict</strong></p>
+        <p>
+            <strong>
+                🌸 IrisPredict
+            </strong>
+        </p>
 
-        <p>Machine Learning Project using Iris Dataset</p>
 
+        <p>
+            Machine Learning Project using Iris Dataset
+        </p>
     </footer>
-
-</body>
-</html>
-```
+</body> 
+</html>        
