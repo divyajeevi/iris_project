@@ -1,174 +1,497 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Iris Prediction - Login</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+
         body {
+
             min-height: 100vh;
+
             font-family: Arial, sans-serif;
+
             background:
-                radial-gradient(circle at 10% 20%, #ddd6fe 0, transparent 25%),
-                radial-gradient(circle at 90% 80%, #fbcfe8 0, transparent 25%),
-                linear-gradient(135deg, #f5f3ff, #fdf2f8, #eff6ff);
+                radial-gradient(
+                    circle at 10% 20%,
+                    #ddd6fe 0,
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 90% 80%,
+                    #fbcfe8 0,
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f5f3ff,
+                    #fdf2f8,
+                    #eff6ff
+                );
 
             display: flex;
+
             justify-content: center;
+
             align-items: center;
-            overflow: hidden;
+
+            padding: 30px;
+
+            overflow: auto;
+
             position: relative;
-            padding: 20px;
         }
 
-        /* Background flowers */
+
+        /* =================================
+           BACKGROUND FLOWERS
+        ================================= */
 
         .flower {
-            position: absolute;
+
+            position: fixed;
+
             font-size: 100px;
+
             opacity: 0.35;
+
             filter: blur(0.5px);
-            animation: float 6s ease-in-out infinite;
+
+            animation:
+                float 6s ease-in-out infinite;
+
+            pointer-events: none;
+
+            z-index: 1;
         }
+
 
         .flower1 {
+
             left: 3%;
+
             top: 8%;
+
+            font-size: 100px;
         }
 
+
         .flower2 {
+
             right: 4%;
+
             top: 12%;
+
             font-size: 90px;
+
             animation-delay: 1s;
         }
 
+
         .flower3 {
+
             left: 5%;
+
             bottom: 8%;
+
             font-size: 110px;
+
             animation-delay: 2s;
         }
 
+
         .flower4 {
+
             right: 5%;
+
             bottom: 5%;
+
             font-size: 120px;
+
             animation-delay: 3s;
         }
 
+
         .flower5 {
+
             left: 20%;
+
             top: 3%;
+
             font-size: 55px;
+
             animation-delay: 1.5s;
         }
 
+
         .flower6 {
+
             right: 20%;
+
             bottom: 4%;
+
             font-size: 60px;
+
             animation-delay: 2.5s;
         }
 
+
         @keyframes float {
+
             0%, 100% {
-                transform: translateY(0px) rotate(0deg);
+
+                transform:
+                    translateY(0px)
+                    rotate(0deg);
             }
 
+
             50% {
-                transform: translateY(-15px) rotate(5deg);
+
+                transform:
+                    translateY(-15px)
+                    rotate(5deg);
             }
         }
 
-        /* Login card */
 
-        .login-container {
+        /* =================================
+           MAIN CONTAINER
+        ================================= */
+
+        .main-container {
+
             width: 100%;
-            max-width: 440px;
 
-            background: rgba(255, 255, 255, 0.88);
+            max-width: 1200px;
+
+            min-height: 650px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.15fr
+                0.85fr;
+
+            background:
+                rgba(255, 255, 255, 0.78);
 
             backdrop-filter: blur(18px);
 
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.9);
 
-            border-radius: 28px;
+            border-radius: 30px;
 
-            padding: 42px;
+            overflow: hidden;
 
             box-shadow:
-                0 25px 70px rgba(100, 80, 160, 0.20);
+                0 25px 70px
+                rgba(100, 80, 160, 0.20);
 
             position: relative;
+
             z-index: 2;
         }
 
-        /* Iris icon */
+
+        /* =================================
+           LEFT PROJECT SECTION
+        ================================= */
+
+        .project-section {
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(224, 231, 255, 0.82),
+                    rgba(250, 232, 255, 0.78),
+                    rgba(253, 242, 248, 0.78)
+                );
+
+            position: relative;
+        }
+
+
+        .project-icon {
+
+            width: 90px;
+
+            height: 90px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #a855f7
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 50px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(99, 102, 241, 0.25);
+        }
+
+
+        .project-section h1 {
+
+            font-size: 46px;
+
+            line-height: 1.1;
+
+            color: #3730a3;
+
+            margin-bottom: 18px;
+        }
+
+
+        .project-description {
+
+            max-width: 600px;
+
+            color: #475569;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =================================
+           INFORMATION CARDS
+        ================================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            max-width: 600px;
+        }
+
+
+        .info-card {
+
+            padding: 18px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.70);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.90);
+
+            transition: 0.3s;
+        }
+
+
+        .info-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(100, 80, 160, 0.12);
+        }
+
+
+        .info-card h3 {
+
+            color: #5b21b6;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .info-card p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =================================
+           PROJECT FEATURES
+        ================================= */
+
+        .features {
+
+            margin-top: 25px;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+        }
+
+
+        .features-title {
+
+            color: #4338ca;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =================================
+           RIGHT LOGIN SECTION
+        ================================= */
+
+        .login-section {
+
+            padding: 50px;
+
+            background:
+                rgba(255, 255, 255, 0.90);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 390px;
+        }
+
+
+        /* =================================
+           LOGIN ICON
+        ================================= */
 
         .iris-icon {
+
             width: 75px;
+
             height: 75px;
 
-            margin: 0 auto 18px;
+            margin:
+                0 auto 18px;
 
             border-radius: 50%;
 
-            background: linear-gradient(
-                135deg,
-                #ddd6fe,
-                #f5d0fe
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #ddd6fe,
+                    #f5d0fe
+                );
 
             display: flex;
+
             justify-content: center;
+
             align-items: center;
 
             font-size: 42px;
 
             box-shadow:
-                0 10px 25px rgba(139, 92, 246, 0.20);
+                0 10px 25px
+                rgba(139, 92, 246, 0.20);
         }
 
-        /* Heading */
 
-        h1 {
+        /* =================================
+           LOGIN HEADING
+        ================================= */
+
+        .login-container h2 {
+
             text-align: center;
 
             color: #4338ca;
 
-            font-size: 34px;
+            font-size: 32px;
 
             margin-bottom: 8px;
         }
 
+
         .subtitle {
+
             text-align: center;
 
             color: #64748b;
 
-            font-size: 16px;
+            font-size: 15px;
 
             margin-bottom: 28px;
         }
 
-        /* Error */
+
+        /* =================================
+           ERROR
+        ================================= */
 
         .error {
+
             background: #fff1f2;
 
             color: #be123c;
 
-            border: 1px solid #fecdd3;
+            border:
+                1px solid
+                #fecdd3;
 
             padding: 13px;
 
@@ -181,9 +504,13 @@
             font-size: 14px;
         }
 
-        /* Labels */
+
+        /* =================================
+           LABELS
+        ================================= */
 
         label {
+
             display: block;
 
             color: #3730a3;
@@ -195,20 +522,27 @@
             font-size: 14px;
         }
 
-        /* Inputs */
+
+        /* =================================
+           INPUTS
+        ================================= */
 
         input {
+
             width: 100%;
 
-            padding: 16px;
+            padding: 15px;
 
             margin-bottom: 20px;
 
-            border: 2px solid #ddd6fe;
+            border:
+                2px solid
+                #ddd6fe;
 
             border-radius: 14px;
 
-            background: rgba(255, 255, 255, 0.9);
+            background:
+                rgba(255, 255, 255, 0.95);
 
             color: #334155;
 
@@ -219,20 +553,29 @@
             transition: 0.3s;
         }
 
+
         input::placeholder {
+
             color: #94a3b8;
         }
 
+
         input:focus {
+
             border-color: #8b5cf6;
 
             box-shadow:
-                0 0 0 4px rgba(139, 92, 246, 0.12);
+                0 0 0 4px
+                rgba(139, 92, 246, 0.12);
         }
 
-        /* Login button */
+
+        /* =================================
+           LOGIN BUTTON
+        ================================= */
 
         button {
+
             width: 100%;
 
             padding: 16px;
@@ -259,24 +602,34 @@
             transition: 0.3s;
 
             box-shadow:
-                0 10px 25px rgba(99, 102, 241, 0.25);
+                0 10px 25px
+                rgba(99, 102, 241, 0.25);
         }
+
 
         button:hover {
-            transform: translateY(-2px);
+
+            transform:
+                translateY(-2px);
 
             box-shadow:
-                0 15px 30px rgba(99, 102, 241, 0.35);
+                0 15px 30px
+                rgba(99, 102, 241, 0.35);
         }
 
-        /* Demo login */
+
+        /* =================================
+           DEMO LOGIN
+        ================================= */
 
         .demo {
+
             margin-top: 25px;
 
             padding: 18px;
 
-            background: rgba(237, 233, 254, 0.7);
+            background:
+                rgba(237, 233, 254, 0.70);
 
             border-radius: 15px;
 
@@ -286,10 +639,14 @@
 
             font-size: 13px;
 
-            border: 1px solid #ddd6fe;
+            border:
+                1px solid
+                #ddd6fe;
         }
 
+
         .demo strong {
+
             display: block;
 
             color: #5b21b6;
@@ -299,105 +656,389 @@
             margin-bottom: 7px;
         }
 
-        /* Mobile */
+
+        /* =================================
+           FOOTER
+        ================================= */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* =================================
+           TABLET
+        ================================= */
+
+        @media (max-width: 850px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+
+            .main-container {
+
+                grid-template-columns: 1fr;
+
+                max-width: 650px;
+            }
+
+
+            .project-section {
+
+                padding: 40px 30px;
+            }
+
+
+            .project-section h1 {
+
+                font-size: 40px;
+            }
+
+
+            .login-section {
+
+                padding: 40px 30px;
+            }
+        }
+
+
+        /* =================================
+           MOBILE
+        ================================= */
 
         @media (max-width: 500px) {
 
-            .login-container {
-                padding: 32px 24px;
+            .project-section {
+
+                padding: 30px 22px;
             }
 
-            h1 {
-                font-size: 29px;
+
+            .project-icon {
+
+                width: 75px;
+
+                height: 75px;
+
+                font-size: 40px;
             }
+
+
+            .project-section h1 {
+
+                font-size: 32px;
+            }
+
+
+            .project-description {
+
+                font-size: 15px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .login-section {
+
+                padding: 35px 22px;
+            }
+
+
+            .login-container h2 {
+
+                font-size: 28px;
+            }
+
 
             .flower {
+
                 font-size: 65px;
             }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- Background flowers -->
 
-    <div class="flower flower1">🌸</div>
-    <div class="flower flower2">🌺</div>
-    <div class="flower flower3">🌷</div>
-    <div class="flower flower4">🌸</div>
-    <div class="flower flower5">🌼</div>
-    <div class="flower flower6">🌷</div>
+    <!-- =================================
+         BACKGROUND FLOWERS
+    ================================= -->
+
+    <div class="flower flower1">
+        🌸
+    </div>
+
+    <div class="flower flower2">
+        🌺
+    </div>
+
+    <div class="flower flower3">
+        🌷
+    </div>
+
+    <div class="flower flower4">
+        🌸
+    </div>
+
+    <div class="flower flower5">
+        🌼
+    </div>
+
+    <div class="flower flower6">
+        🌷
+    </div>
 
 
-    <!-- Login Card -->
+    <!-- =================================
+         MAIN CONTAINER
+    ================================= -->
 
-    <div class="login-container">
+    <div class="main-container">
 
-        <div class="iris-icon">
-            🌸
+
+        <!-- =================================
+             LEFT PROJECT INFORMATION
+        ================================= -->
+
+        <div class="project-section">
+
+
+            <div class="project-icon">
+                🌸
+            </div>
+
+
+            <h1>
+                Iris Flower<br>
+                Prediction
+            </h1>
+
+
+            <p class="project-description">
+
+                A Machine Learning based web application
+                that predicts the species of an Iris flower
+                using its physical measurements.
+
+                After logging in, users can enter the flower
+                measurements and the trained model predicts
+                the most likely Iris species.
+
+            </p>
+
+
+            <!-- Project information -->
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🌱 Dataset
+                    </h3>
+
+                    <p>
+                        The Iris dataset contains measurements
+                        of different Iris flower species.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🤖 Machine Learning
+                    </h3>
+
+                    <p>
+                        A trained classification model is used
+                        to identify the flower species.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        📊 Input Features
+                    </h3>
+
+                    <p>
+                        Sepal Length, Sepal Width,
+                        Petal Length and Petal Width.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🌸 Predictions
+                    </h3>
+
+                    <p>
+                        The application predicts Setosa,
+                        Versicolor or Virginica.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Project features -->
+
+            <div class="features">
+
+                <div class="features-title">
+                    ✨ Project Features
+                </div>
+
+                ✓ Simple and user-friendly interface<br>
+
+                ✓ Machine Learning based prediction<br>
+
+                ✓ Fast flower classification<br>
+
+                ✓ Secure login before prediction
+
+            </div>
+
+
         </div>
 
-        <h1>Iris Prediction</h1>
 
-        <p class="subtitle">
-            Login to continue
-        </p>
+        <!-- =================================
+             RIGHT LOGIN
+        ================================= -->
+
+        <div class="login-section">
 
 
-        {% if error %}
-        <div class="error">
-            {{ error }}
+            <div class="login-container">
+
+
+                <div class="iris-icon">
+                    🌸
+                </div>
+
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+
+                <p class="subtitle">
+                    Login to access Iris Prediction
+                </p>
+
+
+                {% if error %}
+
+                <div class="error">
+                    {{ error }}
+                </div>
+
+                {% endif %}
+
+
+                <!-- LOGIN FORM -->
+
+                <form action="/login" method="POST">
+
+
+                    <label for="username">
+                        Username
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter username"
+                        required
+                    >
+
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        required
+                    >
+
+
+                    <button type="submit">
+                        Login →
+                    </button>
+
+
+                </form>
+
+
+                <!-- DEMO LOGIN -->
+
+                <div class="demo">
+
+                    <strong>
+                        🌿 Demo Login
+                    </strong>
+
+                    Username: admin<br>
+
+                    Password: iris123
+
+                </div>
+
+
+                <div class="footer">
+
+                    Iris Flower Prediction
+                    •
+                    Machine Learning Project
+
+                </div>
+
+
+            </div>
+
+
         </div>
-        {% endif %}
 
-
-        <form action="/login" method="POST">
-
-            <label for="username">
-                Username
-            </label>
-
-            <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter username"
-                required
-            >
-
-
-            <label for="password">
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Enter password"
-                required
-            >
-
-
-            <button type="submit">
-                Login →
-            </button>
-
-        </form>
-
-
-        <div class="demo">
-
-            <strong>🌿 Demo Login</strong>
-
-            Username: admin<br>
-
-            Password: iris123
-
-        </div>
 
     </div>
 
+
 </body>
+
 </html>

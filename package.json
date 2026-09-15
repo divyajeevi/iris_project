@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node -e \"console.log('No frontend build required for this Flask application.')\"",
-    "start": "python app.py",
-    "deploy": "python -m pip install -r requirements.txt && python app.py"
+    "start": "node -e \"const { spawnSync } = require('child_process'); const exe = process.env.PYTHON || 'C:/Program Files/Python312/python.exe'; const result = spawnSync(exe, ['app.py'], { stdio: 'inherit' }); process.exit(result.status ?? 1);\"",
+    "deploy": "node -e \"const { spawnSync } = require('child_process'); const exe = process.env.PYTHON || 'C:/Program Files/Python312/python.exe'; const install = spawnSync(exe, ['-m', 'pip', 'install', '-r', 'requirements.txt'], { stdio: 'inherit' }); if (install.status !== 0) process.exit(install.status ?? 1); const app = spawnSync(exe, ['app.py'], { stdio: 'inherit' }); process.exit(app.status ?? 1);\""
   }
 }
